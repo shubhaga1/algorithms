@@ -7,8 +7,8 @@ public class DigitProduct {
     }
 
     static int product(int num) {
-        if (num == 0) {
-            return 0;
+        if (num%10 == num) {
+            return num;
         
         return product(n/10)+ n%10;
     }
