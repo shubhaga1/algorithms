@@ -16,17 +16,18 @@ public class FirstNegativeNumbers {
             j++;
             
             if (j - i + 1 >= k) {
-                ans.add(result.get(0)); // Add the first negative number to the final result
+                if (!result.isEmpty()){
+                    ans.add(result.get(0)); // Add the first negative number to the final result
+                }
                 i++;
-                j++;
-                
-                if (!result.isEmpty() && arr[j] == result.get(0)) {
+            
+                if (!result.isEmpty() && arr[i-1] == result.get(0)) {
                     result.remove(0); // Remove the first negative number from the result if it is the next element in the window
                 }
             }
         }
         
-        return ans;
+        return ans; 
     }
 
     public static void main(String[] args) {
@@ -38,5 +39,7 @@ public class FirstNegativeNumbers {
         for (int num : result) {
             System.out.print(num + " ");
         }
+        // First negative numbers in each window:
+            // -3 -3 -1 -1 -2 -3 
     }
 }
