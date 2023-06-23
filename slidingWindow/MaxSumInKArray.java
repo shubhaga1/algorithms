@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SlidingWindow {
+public class MaxSumInKArray {
 
     public static int findMaxSum(int[] arr, int k) {
 
