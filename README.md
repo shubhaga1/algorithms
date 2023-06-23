@@ -8,8 +8,8 @@ All the codes in this playlist have been tested using an online Java compiler. Y
 
 ## Playlist Contents
 
-1. [Introduction to Data Structures](playlist/introduction-to-data-structures.md)
-2. [Arrays and Strings](playlist/arrays-and-strings.md)
+1. [Introduction to Data Structures](playlist/Introduction/introduction-to-data-structures.md)
+2. [Arrays and Strings](playlist/arrays-and-strings/arrays-and-strings.md)
 3. [Linked Lists](playlist/linked-lists.md)
 4. [Stacks and Queues](playlist/stacks-and-queues.md)
 5. [Trees](playlist/trees.md)
