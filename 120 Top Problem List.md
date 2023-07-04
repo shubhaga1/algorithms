@@ -44,9 +44,7 @@ This repository contains solutions to various LeetCode problems. LeetCode is a p
 
 ## String
 36. [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
-37. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-char
-
-acters/)
+37. [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 38. [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
 39. [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 40. [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
@@ -148,4 +146,4 @@ acters/)
 118. [Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones/)
 119. [Russian Doll Envelopes](https://leetcode.com/problems/russian-doll-envelopes/)
 
-I hope this numbering helps! Let me know if there's anything else I can assist you with.
+
