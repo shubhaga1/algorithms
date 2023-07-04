@@ -1,6 +1,7 @@
 # LeetCode Problem Solutions
 
 This repository contains solutions to various LeetCode problems. LeetCode is a popular platform for practicing coding interview questions and improving algorithmic skills. The solutions provided here are implemented in Python and are categorized based on the data structure or algorithm they cover.
+
 ## Arrays
 1. [Two Sum](https://leetcode.com/problems/two-sum/)
 2. [3Sum](https://leetcode.com/problems/3sum/)
@@ -91,9 +92,7 @@ This repository contains solutions to various LeetCode problems. LeetCode is a p
 73. [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream)
 74. [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements)
 75. [Top K Frequent Words](https://leetcode.com/problems/top-k-frequent-words)
-76. [K Closest
-
- Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+76. [K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
 
 ## Binary Trees
 77. [Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
