@@ -3,6 +3,13 @@
 class ValidPalindrome {
     public boolean isPalindrome(String s) {
         String s1="";
+
+        /*
+            Below line filters out characters that are not lowercase alphabets, uppercase alphabets, or digits.
+            Can also use this - if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || Character.isDigit(ch))
+            For the input string s = "A man, a plan, a canal: Panama!", the filtered string s1 would be "AmanaplanacanalPanama".
+         */
+        
         for(Character ch : s.toCharArray()){
             if( (ch >= 97 && ch <= (97+25)) || (ch >= 65 && ch <= (65+25) ) || Character.isDigit(ch)){
                 s1+=ch;
