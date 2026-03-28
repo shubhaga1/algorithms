@@ -19,6 +19,7 @@ algorithms/
 ├── hashmap/            # Frequency count, common elements, subarray sum
 ├── slidingWindow/      # Max sum in K, min subarray length, anagram
 ├── graph/              # Graph problems (WIP)
+├── graph/              # BFS, Dijkstra, state design, river crossing
 └── misc/               # Primes, collections, utilities
 ```
 
