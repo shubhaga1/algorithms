@@ -39,8 +39,13 @@ class Trie {
     }
 
     public boolean search(String word) {
-        // TODO
-        return false;
+        TrieNode current = root;
+        for (int i = 0; i < word.length(); i++) {
+            int idx = word.charAt(i) - 'a';
+            if (current.children[idx] == null) return false;
+            current = current.children[idx];
+        }
+        return current.isEnd;
     }
 
     public boolean startsWith(String prefix) {
