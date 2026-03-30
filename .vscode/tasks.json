@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and Run Java",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/target && javac -d ${workspaceFolder}/target ${file} && java -cp ${workspaceFolder}/target ${fileBasenameNoExtension}",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
