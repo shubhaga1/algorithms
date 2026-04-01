@@ -1,4 +1,3 @@
-package codequality;
 
 /**
  * Q2: Base Cases — always at the top, always complete

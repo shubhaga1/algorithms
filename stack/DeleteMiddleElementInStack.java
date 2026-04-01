@@ -1,18 +1,21 @@
 import java.util.Stack;
 
-public class DeleteMiddleElementInStack {
-    public static void deleteMiddleElement(Stack<Integer> stack, int count, int size) {
-        if (count == stack.size() / 2) {
-          stack.pop();  
-          return;
+/**
+ * Delete middle element of a stack using recursion.
+ * Middle = size/2 index (0-based from bottom)
+ */
+class DeleteMiddleElementInStack {
+
+    static void deleteMiddle(Stack<Integer> stack, int count, int size) {
+        if (count == size / 2) {
+            stack.pop();    // remove middle element
+            return;
         }
-
-        int num = stack.top(); // saving the value in recursive call
+        int num = stack.peek();  // peek() not top() — Java Stack uses peek()
         stack.pop();
-        deleteMiddleElement(stack, count+1, size);
-        stack.push(num); // when recursion returns before completing function, it will add all evicted numbers.
+        deleteMiddle(stack, count + 1, size);
+        stack.push(num);        // restore elements above middle on the way back
     }
-
 
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<>();
@@ -22,10 +25,8 @@ public class DeleteMiddleElementInStack {
         stack.push(4);
         stack.push(5);
 
-        System.out.println("Original Stack: " + stack);
-
-        deleteMiddleElement(stack);
-
-        System.out.println("Stack after deleting middle element: " + stack);
+        System.out.println("Original: " + stack);
+        deleteMiddle(stack, 0, stack.size());   // pass size before recursion changes it
+        System.out.println("After deleting middle: " + stack);  // [1, 2, 4, 5]
     }
 }

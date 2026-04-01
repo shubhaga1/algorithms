@@ -1,4 +1,3 @@
-package aakuTeaching;
 
 import java.util.Scanner;
 

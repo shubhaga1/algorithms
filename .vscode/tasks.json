@@ -2,17 +2,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Compile and Run Java",
+            "label": "Run Java File",
             "type": "shell",
-            "command": "mkdir -p ${workspaceFolder}/target && javac -d ${workspaceFolder}/target ${file} && java -cp ${workspaceFolder}/target $(grep -m1 '^package' ${file} | sed 's/package //;s/;//').${fileBasenameNoExtension} 2>/dev/null || java -cp ${workspaceFolder}/target ${fileBasenameNoExtension}",
+            "command": "cd ${workspaceFolder} && mkdir -p target && javac -d target ${file} && java -cp target $(grep -m1 '^class\\|^public class' ${file} | sed 's/public class //;s/class //;s/ .*//')",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "presentation": {
                 "reveal": "always",
-                "panel": "shared"
-            }
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": "$javac"
         }
     ]
 }

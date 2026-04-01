@@ -1,4 +1,3 @@
-package fundamentals;
 
 /**
  * JavaPassByValueDemo — Why void recursive insert is broken

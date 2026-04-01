@@ -1,39 +1,35 @@
 import java.util.Stack;
 
-public class ValidParentheses {
-    public static boolean isValid(String s) {
+/**
+ * Valid Parentheses — check if brackets are correctly matched and nested.
+ * Approach: push opening brackets, pop and match on closing brackets.
+ */
+class ValidParentheses {
+
+    static boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
 
-      
-
-        for (char c : s.toCharArray()) {
-          if(ch == '(' || ch == '{' || ch == '['){
-             stack.push(ch);
-          } else {
-            if(!stack.empty()) {
-                  char top = stack.top();
-                  if( (ch == ')' && top == '(') || 
-                     ( ch == '}' && top == '{') || 
-                     (ch == ']' && top == '[') ) {
-                      s.pop();
-                  }
-                 else
-                     return false; 
-             }
-             else
-                 return false;
-          }
+        for (char c : s.toCharArray()) {          // c not ch — loop variable is c
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else {
+                if (stack.empty()) return false;
+                char top = stack.peek();           // peek() not top()
+                if ((c == ')' && top == '(') ||
+                    (c == '}' && top == '{') ||
+                    (c == ']' && top == '[')) {
+                    stack.pop();                   // pop from stack, not s.pop()
+                } else {
+                    return false;
+                }
+            }
         }
         return stack.isEmpty();
     }
 
     public static void main(String[] args) {
-        String str1 = "()[]{}";
-        String str2 = "([)]";
-        String str3 = "{[()]}";
-
-        System.out.println(str1 + " is valid: " + isValid(str1));
-        System.out.println(str2 + " is valid: " + isValid(str2));
-        System.out.println(str3 + " is valid: " + isValid(str3));
+        System.out.println("()[]{}  valid: " + isValid("()[]{}"));   // true
+        System.out.println("([)]    valid: " + isValid("([)]"));      // false
+        System.out.println("{[()]}  valid: " + isValid("{[()]}"));    // true
     }
 }

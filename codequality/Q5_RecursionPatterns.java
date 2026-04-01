@@ -1,4 +1,3 @@
-package codequality;
 
 /**
  * Q5: Recursion Patterns — common mistakes

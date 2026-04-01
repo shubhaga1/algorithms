@@ -1,4 +1,3 @@
-package fundamentals;
 
 /**
  * StaticVsInstance — When to use static vs instance variables/methods

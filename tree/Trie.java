@@ -1,4 +1,3 @@
-package tree;
 /**
  * Trie (Prefix Tree)
  *

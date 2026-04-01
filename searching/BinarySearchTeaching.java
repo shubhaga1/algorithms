@@ -1,40 +1,28 @@
-package aakuTeaching;
-
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Scanner;
 
-public class BinarySearch {
+class BinarySearch {
+
     public static void main(String[] args) {
-        int ar[] = {6, 4, 7, 8, 2, 3};
-        Arrays.sort(ar);
+        int[] ar = {6, 4, 7, 8, 2, 3};
+        Arrays.sort(ar);                              // binary search requires sorted array
         System.out.println("Enter value you need to check");
-        Scanner sc = new Scanner(System.in);
-        int find = sc.nextInt();
-        int h = (ar.length - 1);
-        int l = 0;
-        System.out.println("number is available in the array at" + binary(ar, l, h, find) + " position");
+        try (Scanner sc = new Scanner(System.in)) {
+            int find = sc.nextInt();
+            int result = binary(ar, 0, ar.length - 1, find);
+            if (result == -1) System.out.println(find + " not found");
+            else System.out.println(find + " found at index " + result);
+        }
     }
 
-    //Big(0) = logn
-    public static int binary(int ar[], int l, int h, int find) {
-        if (l < h) {
-            for (int i = 0; i < h; i++) {
-                int mid = ar.length / 2;
-                if (find == ar[i]) {
-                    return i;
+    // O(log n) — halves search space each call
+    public static int binary(int[] ar, int l, int h, int find) {
+        if (l > h) return -1;                         // base case — not found
 
-                } else if (find > ar[mid]) {
-                    l = mid + 1;
-                    binary(ar, l, h, find);
-                } else if (find < ar[mid]) {
-                    h = mid;
-                    l=0;
-                    binary(ar, l, h, find);
-                }
-            }
-        }
-        return 0;
+        int mid = l + (h - l) / 2;                   // avoids overflow vs (l+h)/2
+
+        if (find == ar[mid]) return mid;              // found
+        if (find > ar[mid])  return binary(ar, mid + 1, h, find);    // go right
+        return binary(ar, l, mid - 1, find);          // go left
     }
 }
