@@ -1,4 +1,3 @@
-package recursion;
 
 /**
  * Maze — Approach 2: Memoization (Top-Down DP)

@@ -1,20 +1,25 @@
-package recursion;
-  
+/**
+ * ReverseNum — reverse digits of a number recursively
+ * 1234 → 4321
+ */
 class ReverseNum {
-    static int sum =0;
-    public static void main(String[] args) {
-        int num = 1234;
-      if (num < 0) {
-          num = -num; // Convert negative number to positive
-      }
-        System.out.println(sum);
+
+    static int reversed = 0;
+
+    static void reverse(int n) {
+        if (n == 0) return;                           // base case
+        reversed = reversed * 10 + n % 10;           // append last digit
+        reverse(n / 10);                              // recurse on remaining digits
     }
 
-    static void revNum(int n) {
-        if (n ==0) {
-            return;
-        }
-        sum = sum*10+ n%10;
-        revNum(n/10);
+    public static void main(String[] args) {
+        int num = 1234;
+        reverse(num);                                 // was never called before — bug fixed
+        System.out.println("Reversed: " + reversed); // 4321
+
+        // reset for second call
+        reversed = 0;
+        reverse(5678);
+        System.out.println("Reversed: " + reversed); // 8765
     }
 }

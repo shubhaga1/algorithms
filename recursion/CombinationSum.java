@@ -1,49 +1,38 @@
-package recursion;
+import java.util.ArrayList;
+import java.util.List;
 
-/*
-https://leetcode.com/problems/combination-sum/description/
-
-Intuition
-Initially, the index will be 0, target as given and the data structure(vector or list) will be empty.
-
-Now there are 2 options viz to pick or not pick the current index element.
-
-If you pick the element, again come back at the same index as multiple occurrences of the same element is possible so the target reduces to target – arr[index] (where target -arr[index]>=0)and also insert the current element into the data structure.
-
-If you decide not to pick the current element, move on to the next index and the target value stays as it is. Also, the current element is not inserted into the data structure.
-
-While backtracking makes sure to pop the last element as shown in the recursion tree below.
-
-Keep on repeating this process while index < size of the array for a particular recursion call.
-
-You can also stop the recursion when the target value is 0, but here a generalized version without adding too many conditions is considered.
-
-Complexity
-Time complexity:O(2t∗k)O(2^t * k)O(2 t∗k) where t is the target, k is the average length.
-*/
+// https://leetcode.com/problems/combination-sum/description/
+// Find all combinations from candidates[] that sum to target (reuse allowed)
+// Approach: pick or skip each element, backtrack when target exhausted
 
 class CombinationSum {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<Integer> sublist=new ArrayList<>();
-        List<List<Integer>> list=new ArrayList<>();
-        int index=0;
-        combination(candidates, target,index,sublist,list);
-        return list;
-    }
-    void combination(int[] candidates, int target, int index, List<Integer> sublist, List<List<Integer>> list) {
-        if (index== candidates.length){
-            if (target==0){
-                list.add(new ArrayList<>(sublist));
-            }
+
+    static void combination(int[] candidates, int target, int index,
+                            List<Integer> current, List<List<Integer>> result) {
+        if (index == candidates.length) {
+            if (target == 0) result.add(new ArrayList<>(current));  // valid combination found
             return;
         }
-        if (candidates[index]<=target){
-            sublist.add(candidates[index]);
-            //- Taking the same index
-            combination(candidates,target-candidates[index],index,sublist,list);
-            sublist.remove(sublist.size()-1);
+
+        if (candidates[index] <= target) {
+            current.add(candidates[index]);
+            combination(candidates, target - candidates[index], index, current, result);  // pick same again
+            current.remove(current.size() - 1);  // backtrack
         }
-        //- We will be increasing the index since above pick didn't make us to our desired answer.So,we will leave it (not pick)
-        combination(candidates,target,index+1,sublist,list);
+
+        combination(candidates, target, index + 1, current, result);  // skip current element
+    }
+
+    static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        combination(candidates, target, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] candidates = {2, 3, 6, 7};
+        int target = 7;
+        System.out.println("Combinations summing to " + target + ": "
+                           + combinationSum(candidates, target));  // [[2,2,3],[7]]
     }
 }

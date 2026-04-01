@@ -1,9 +1,8 @@
-package recursion;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class FactorialTeaching {
+class Factorial {
     
     public static void main(String[] args) {
         try {

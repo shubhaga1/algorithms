@@ -1,4 +1,3 @@
-package recursion;
 
 class StairClimber {
     public static int countDistinctWays(int n, int[] steps) {

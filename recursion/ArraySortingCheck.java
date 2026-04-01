@@ -1,4 +1,3 @@
-package recursion;
 
 class ArraySortingCheck {
     public static boolean isSorted(int[] arr) {

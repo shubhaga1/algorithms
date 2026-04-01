@@ -1,24 +1,23 @@
-package recursion;
-  
+/**
+ * Binary Search — recursive
+ * Requires a SORTED array. Halves search space each call.
+ * Time: O(log n)  Space: O(log n) call stack
+ */
 class BinarySearch {
-    public static void main(String[] args) {
-        int[] arr = {1, 2, 32, 14, 55, 66, 78};
-        int target = 8;
-        System.out.println(search(arr, target, 0, arr.length - 1));
+
+    static int search(int[] arr, int target, int start, int end) {
+        if (start > end) return -1;                   // base case — not found
+
+        int mid = start + (end - start) / 2;          // avoids int overflow vs (start+end)/2
+
+        if (arr[mid] == target) return mid;
+        if (target < arr[mid])  return search(arr, target, start, mid - 1);  // go left
+        return search(arr, target, mid + 1, end);      // go right
     }
 
-    static int search(int[] arr, int target, int s, int e) {
-        if (s > e) {
-            return -1;
-        }
-        int m = s + (e - s) / 2;
-        if (arr[m] == target) {
-            return m;
-        }
-        if (target < arr[m]) {
-            return search(arr, target, s, m - 1);
-        }
-        return search(arr, target, m + 1, e);
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 14, 32, 55, 66, 78};       // must be sorted — was unsorted before, binary search won't work on unsorted arrays
+        System.out.println("Index of 14: " + search(arr, 14, 0, arr.length - 1));  // 2
+        System.out.println("Index of  8: " + search(arr,  8, 0, arr.length - 1));  // -1
     }
 }
-

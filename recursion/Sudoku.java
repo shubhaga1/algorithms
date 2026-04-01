@@ -1,78 +1,66 @@
-package recursion;
-
+/**
+ * Sudoku Solver — backtracking
+ * Try digits 1-9 in each empty cell ('.'), backtrack if invalid.
+ */
 class Sudoku {
-   // Check if it's safe to place a number in a particular position
-   public boolean isSafe(char[][] board, int row, int col, int number) {
-       // Check column
-       for (int i = 0; i < board.length; i++) {
-           if (board[i][col] == (char) (number + '0')) {
-               return false;
-           }
-       }
-      
-       // Check row
-       for (int j = 0; j < board.length; j++) {
-           if (board[row][j] == (char) (number + '0')) {
-               return false;
-           }
-       }
-      
-       // Check grid
-       int startRow = 3 * (row / 3);
-       int startCol = 3 * (col / 3);
-      
-       for (int i = startRow; i < startRow + 3; i++) {
-           for (int j = startCol; j < startCol + 3; j++) {
-               if (board[i][j] == (char) (number + '0')) {
-                   return false;
-               }
-           }
-       }
-      
-       return true;
-   }
-  
-   // Recursive helper function to solve the Sudoku puzzle
-   public boolean helper(char[][] board, int row, int col) {
-       // Base case: If all cells have been filled, return true
-       if (row == board.length) {
-           return true;
-       }
-      
-       // Determine the next row and column indices
-       int nextRow = 0;
-       int nextCol = 0;
-      
-       if (col == board.length - 1) {
-           nextRow = row + 1;
-           nextCol = 0;
-       } else {
-           nextRow = row;
-           nextCol = col + 1;
-       }
-      
-       // If the current cell is not empty, move on to the next cell
-       if (board[row][col] != '.') {
-           return helper(board, nextRow, nextCol);
-       } else {
-           // Try placing numbers from 1 to 9 in the current cell
-           for (int i = 1; i <= 9; i++) {
-               if (isSafe(board, row, col, i)) {
-                   board[row][col] = (char) (i + '0');
-                   if (helper(board, nextRow, nextCol)) {
-                       return true;
-                   } else {
-                       board[row][col] = '.';
-                   }
-               }
-           }
-       }
-                     
-       return false;
-   }
-  
-   // Main function to solve the Sudoku puzzle
-   public void solveSudoku(char[][] board) {
-       helper(board, 0, 0);
-   }
+
+    static boolean isSafe(char[][] board, int row, int col, int number) {
+        char ch = (char) (number + '0');
+
+        for (int i = 0; i < 9; i++) {
+            if (board[i][col] == ch) return false;    // same column
+            if (board[row][i] == ch) return false;    // same row
+        }
+
+        // check 3x3 box
+        int startRow = 3 * (row / 3);
+        int startCol = 3 * (col / 3);
+        for (int i = startRow; i < startRow + 3; i++)
+            for (int j = startCol; j < startCol + 3; j++)
+                if (board[i][j] == ch) return false;
+
+        return true;
+    }
+
+    static boolean solve(char[][] board, int row, int col) {
+        if (row == 9) return true;                    // all rows filled — solved
+
+        int nextRow = (col == 8) ? row + 1 : row;
+        int nextCol = (col == 8) ? 0 : col + 1;
+
+        if (board[row][col] != '.') return solve(board, nextRow, nextCol);  // skip pre-filled
+
+        for (int num = 1; num <= 9; num++) {
+            if (isSafe(board, row, col, num)) {
+                board[row][col] = (char) (num + '0');
+                if (solve(board, nextRow, nextCol)) return true;
+                board[row][col] = '.';                // backtrack
+            }
+        }
+        return false;
+    }
+
+    static void print(char[][] board) {
+        for (char[] row : board) {
+            for (char c : row) System.out.print(c + " ");
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        char[][] board = {
+            {'5','3','.','.','7','.','.','.','.'},
+            {'6','.','.','1','9','5','.','.','.'},
+            {'.','9','8','.','.','.','.','6','.'},
+            {'8','.','.','.','6','.','.','.','3'},
+            {'4','.','.','8','.','3','.','.','1'},
+            {'7','.','.','.','2','.','.','.','6'},
+            {'.','6','.','.','.','.','2','8','.'},
+            {'.','.','.','4','1','9','.','.','5'},
+            {'.','.','.','.','8','.','.','7','9'}
+        };
+
+        if (solve(board, 0, 0)) print(board);
+        else System.out.println("No solution");
+    }
 }

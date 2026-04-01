@@ -1,34 +1,25 @@
-package recursion;
-
 // https://leetcode.com/problems/valid-palindrome/description/
 
 class ValidPalindrome {
-    public boolean isPalindrome(String s) {
-        String s1="";
 
-        /*
-            Below line filters out characters that are not lowercase alphabets, uppercase alphabets, or digits.
-            Can also use this - if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || Character.isDigit(ch))
-            For the input string s = "A man, a plan, a canal: Panama!", the filtered string s1 would be "AmanaplanacanalPanama".
-         */
-        
-        for(Character ch : s.toCharArray()){
-            if( (ch >= 97 && ch <= (97+25)) || (ch >= 65 && ch <= (65+25) ) || Character.isDigit(ch)){
-                s1+=ch;
-            }
+    static boolean isPalindrome(String s) {
+        // keep only alphanumeric chars, lowercase
+        StringBuilder sb = new StringBuilder();
+        for (char ch : s.toCharArray()) {
+            if (Character.isLetterOrDigit(ch)) sb.append(Character.toLowerCase(ch));
         }
-        return isPalindromeHelper(s1.toLowerCase(),0,s1.length()-1);
+        return check(sb.toString(), 0, sb.length() - 1);
     }
 
-    private boolean isPalindromeHelper(String s, int i, int j) {
-         if (i <= j) {
-            char left = s.charAt(i);
-            char right = s.charAt(j);
-            if (left == right) {
-                return isPalindromeHelper(s, ++i, --j);
-            }
-            return false;
-        }
-        return true;
+    static boolean check(String s, int i, int j) {
+        if (i >= j) return true;                      // base case — pointers crossed
+        if (s.charAt(i) != s.charAt(j)) return false; // mismatch
+        return check(s, i + 1, j - 1);               // recurse inward
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama")); // true
+        System.out.println(isPalindrome("race a car"));                      // false
+        System.out.println(isPalindrome(" "));                               // true
     }
 }

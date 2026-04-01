@@ -1,4 +1,3 @@
-package recursion;
 
 /**
  * Maze — Approach 3: Bottom-Up DP Table
