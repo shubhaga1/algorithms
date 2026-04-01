@@ -1,6 +1,6 @@
-package com.shubham.recursion;
+package recursion;
   
-public class BinarySearch {
+class BinarySearch {
     public static void main(String[] args) {
         int[] arr = {1, 2, 32, 14, 55, 66, 78};
         int target = 8;

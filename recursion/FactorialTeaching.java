@@ -3,7 +3,7 @@ package recursion;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Factorial {
+class FactorialTeaching {
     public static void main(String[] args) {
         try {
             getNumber();
@@ -16,15 +16,16 @@ public class Factorial {
     }
 
     public static void getNumber(){
-        Scanner s = new Scanner(System.in);
-        System.out.println("Find me the factorial of ?");
-        int num = s.nextInt();
-        System.out.println((factorial(num)));
+        try (Scanner s = new Scanner(System.in)) {   // try-with-resources: auto-closes s
+            System.out.println("Find me the factorial of ?");
+            int num = s.nextInt();
+            System.out.println((factorial(num)));
+        }
     }
 
     public static long factorial(int n) {
         // Base condition
-        if (n == 0)
+        if (n <= 0)
             return 1;
         return n * factorial(n - 1);
     }

@@ -1,4 +1,6 @@
-public class StairClimberBasic {
+package recursion;
+
+class StairClimberBasic {
     public static int countDistinctWays(int n) {
         
         if(n<0){

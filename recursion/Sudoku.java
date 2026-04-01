@@ -1,3 +1,5 @@
+package recursion;
+
 class Sudoku {
    // Check if it's safe to place a number in a particular position
    public boolean isSafe(char[][] board, int row, int col, int number) {

@@ -1,6 +1,6 @@
-package com.shubham.recursion;
+package recursion;
   
-public class DigitProduct {
+class DigitProduct {
     public static void main(String[] args) {
         int num = 1234;
         System.out.println(product(num));

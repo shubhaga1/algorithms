@@ -1,4 +1,6 @@
-public class ArraySortingCheck {
+package recursion;
+
+class ArraySortingCheck {
     public static boolean isSorted(int[] arr) {
         return isSortedRecursive(arr, 0);
     }

@@ -1,4 +1,8 @@
-public class Fibonacci {
+package recursion;
+
+import java.util.Scanner;
+
+class Fibonacci {
     public static int fibonacci(int n) {
         if (n <= 1) {
             return n;
@@ -7,8 +11,15 @@ public class Fibonacci {
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
     
+    public static int getNumber(){
+        try(Scanner scanner = new Scanner(System.in)){
+            System.out.println("Enter the number till which you need Fibonacci Series");
+            return (scanner.nextInt());
+        }
+    }
+
     public static void main(String[] args) {
-        int n = 10;
+        int n = getNumber();
         System.out.println("Fibonacci sequence up to " + n + ":");
         for (int i = 0; i <= n; i++) {
             System.out.print(fibonacci(i) + " ");

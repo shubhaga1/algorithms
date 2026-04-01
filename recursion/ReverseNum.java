@@ -1,6 +1,6 @@
-package com.shubham.recursion;
+package recursion;
   
-public class ReverseNum {
+class ReverseNum {
     static int sum =0;
     public static void main(String[] args) {
         int num = 1234;

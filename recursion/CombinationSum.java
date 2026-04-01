@@ -1,3 +1,5 @@
+package recursion;
+
 /*
 https://leetcode.com/problems/combination-sum/description/
 
@@ -20,7 +22,7 @@ Complexity
 Time complexity:O(2t∗k)O(2^t * k)O(2 t∗k) where t is the target, k is the average length.
 */
 
-class Solution {
+class CombinationSum {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<Integer> sublist=new ArrayList<>();
         List<List<Integer>> list=new ArrayList<>();

@@ -1,6 +1,6 @@
-package com.shubham.basic;
+package recursion;
 
-public class Fact {
+class Fact {
     public static void main(String[] args) {
         int ans = fact(5);
         System.out.println(ans);

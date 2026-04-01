@@ -1,4 +1,6 @@
-public class BinarySearchIterative {
+package recursion;
+
+class BinarySearchIterative {
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 5, 7, 9, 11, 15, 20, 34};  // must be sorted for binary search
