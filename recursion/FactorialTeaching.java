@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class FactorialTeaching {
+    
     public static void main(String[] args) {
         try {
             getNumber();

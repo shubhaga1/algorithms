@@ -4,7 +4,7 @@
         {
             "label": "Compile and Run Java",
             "type": "shell",
-            "command": "mkdir -p ${workspaceFolder}/target && javac -d ${workspaceFolder}/target ${file} && java -cp ${workspaceFolder}/target ${fileBasenameNoExtension}",
+            "command": "mkdir -p ${workspaceFolder}/target && javac -d ${workspaceFolder}/target ${file} && java -cp ${workspaceFolder}/target $(grep -m1 '^package' ${file} | sed 's/package //;s/;//').${fileBasenameNoExtension} 2>/dev/null || java -cp ${workspaceFolder}/target ${fileBasenameNoExtension}",
             "group": {
                 "kind": "build",
                 "isDefault": true
