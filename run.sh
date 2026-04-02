@@ -10,7 +10,7 @@ if [ -z "$FILE" ]; then
 fi
 
 # Extract class name from file (not filename — they can differ with numeric prefixes)
-CLASS=$(grep -m1 "^class\|^public class" "$FILE" | sed 's/public class //;s/class //;s/ .*//')
+CLASS=$(grep -m1 "^class\|^public class" "$FILE" | sed 's/public class //;s/class //;s/[{ ].*//')
 
 mkdir -p target
-javac -d target "$FILE" && java -cp target "$CLASS" < /dev/tty
+javac -d target "$FILE" && java -cp target "$CLASS"
