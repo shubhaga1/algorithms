@@ -180,4 +180,4 @@ git push --force origin master
 
 ---
 
-*By [Shubham Garg](https://www.linkedin.com/in/shubhaga/) — Engineering Manager*
+*By [Shubham Garg](https://www.linkedin.com/in/shubhaga/) *

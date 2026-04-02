@@ -133,15 +133,126 @@ git add *.java
 # Short message
 git commit -m "Add BinarySearch iterative and recursive versions"
 
-# What makes a good commit message?
-# ✅ "Fix off-by-one error in BubbleSort inner loop"
-# ✅ "Add NQueen backtracking — places N queens on NxN board"
-# ❌ "fixed stuff"
-# ❌ "update"
-# ❌ "asdfgh"
+# -am shortcut: stage ALL modified files AND commit in one command
+git commit -am "Fix off-by-one error in BubbleSort inner loop"
+# ⚠️  -a only stages files already tracked (modified)
+# ⚠️  New files (untracked) still need git add first
+
+# So the difference is:
+git add .                              # stages everything including new files
+git commit -m "msg"                    # commit what's staged
+
+git commit -am "msg"                   # shortcut — skips git add for modified files only
 
 # See what you're about to commit before committing
 git diff --staged
+```
+
+---
+
+## Commit Message Best Practices
+
+### The format
+
+```
+<type>: <short summary>          ← subject line (max 72 chars)
+
+<longer explanation if needed>   ← body (optional, leave blank line above)
+```
+
+---
+
+### Types — use one prefix consistently
+
+| Type | When to use | Example |
+| --- | --- | --- |
+| `Add` | New file, feature, class | `Add NQueen backtracking solution` |
+| `Fix` | Bug fix | `Fix off-by-one in BubbleSort inner loop` |
+| `Update` | Change to existing feature | `Update BST delete to handle two-child case` |
+| `Remove` | Delete code or files | `Remove duplicate LinearSearch from spring-leetcode` |
+| `Refactor` | Restructure without behavior change | `Refactor MazePaths into 3 focused classes` |
+| `Move` | Move files between folders | `Move ZeroFilledSubarrays to array package` |
+| `Rename` | Rename files or classes | `Rename Fibonacci to 02_Fibonacci for ordering` |
+| `Fix build` | Compilation or tooling fix | `Fix build: remove nested .git from security-poc` |
+
+---
+
+### Rules
+
+#### 1. Subject line answers: what + why (not how)
+
+```bash
+✅ "Fix BST delete — leaf node case returned wrong parent"
+✅ "Add amortised O(1) demo to show ArrayList resize cost"
+❌ "updated BST.java"
+❌ "changes"
+❌ "fix"
+```
+
+#### 2. Use present tense, imperative mood
+
+```bash
+✅ "Add Trie search"        (like a command)
+❌ "Added Trie search"
+❌ "Adding Trie search"
+```
+
+#### 3. Max 72 characters in subject line
+
+```bash
+✅ "Add NQueen backtracking — places N queens on NxN board"   (55 chars)
+❌ "Add NQueen backtracking solution that places N queens on an NxN board using recursion"
+```
+
+#### 4. One commit = one logical change
+
+```bash
+✅ Commit 1: "Add MaxHeap insert"
+   Commit 2: "Add MaxHeap extractMax"
+❌ One commit: "Add MaxHeap insert and extractMax and fix BST and rename files"
+```
+
+#### 5. Don't describe what is obvious from the diff
+
+```bash
+✅ "Fix stack overflow in Fibonacci — missing base case for n=1"
+❌ "Add if statement to Fibonacci.java"   ← git diff already shows this
+```
+
+---
+
+### Real examples from this repo
+
+```bash
+# ✅ Good — says what AND why
+git commit -m "Fix and perfect all recursion classes — compilable and runnable"
+git commit -m "Add visual grid printer to Maze1Recursive to show path as * on grid"
+git commit -m "Rewrite README with full project learnings, VS Code setup, git config"
+
+# ✅ Good — short and clear
+git commit -m "Add ZeroFilledSubarrays (LeetCode 2348) to array package"
+git commit -m "Move ZeroFilledSubarrays from spring-leetcode to algorithms/array"
+
+# ❌ Bad — already in this repo's history
+git commit -m "added scanner method"     # lowercase, no context
+git commit -m "Array2D class and run.sh" # what changed, not why
+```
+
+---
+
+### When to add a body (multi-line)
+
+Use a body when the subject line isn't enough to explain the decision:
+
+```bash
+git commit -m "Refactor MazePaths into 3 focused classes
+
+Split one large class into:
+- Maze1Recursive: basic path counting
+- Maze2CollectPaths: collect all paths as ArrayList
+- Maze3Visual: print grid with * markers
+
+Each class builds on the previous — easier to learn step by step."
 ```
 
 ---
