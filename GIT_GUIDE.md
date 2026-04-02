@@ -1,6 +1,6 @@
 # Git — Important Commands & Basic Flow
 
-A practical guide with real examples from this repo.
+A practical guide with real examples from this repo (`algorithms` and `node-learnings`).
 
 ---
 
@@ -362,6 +362,141 @@ git reset HEAD~1            # undo commit, keep changes
 git checkout correct-branch
 git add .
 git commit -m "same message"
+```
+
+---
+
+## Real Commands Used in This Project
+
+Every command below was actually run while building the `algorithms` and `node-learnings` repos.
+
+### Starting the repos
+
+```bash
+# algorithms — started locally, then pushed to GitHub
+git init
+git add .
+git commit -m "Create InsertTree.java"
+git remote add origin https://github.com/shubhaga1/algorithms.git
+git push -u origin main
+
+# node-learnings — created and pushed in one shot using GitHub CLI
+gh repo create node-learnings --public --source . --remote origin --push
+```
+
+---
+
+### Everyday commits in algorithms
+
+```bash
+# Adding a new class
+git add tree/Trie.java
+git commit -m "Add Trie insert and search"
+git push
+
+# Fixing multiple files at once
+git add recursion/
+git commit -m "Fix and perfect all recursion classes — compilable and runnable"
+git push
+
+# Moving files between folders (delete old, add new)
+git add algorithms/array/ZeroFilledSubarrays.java
+git commit -m "Move ZeroFilledSubarrays from spring-leetcode to algorithms/array"
+git push
+```
+
+---
+
+### Fixing the nested git problem (security-poc inside algorithms)
+
+```bash
+# Problem: security-poc had its own .git — Git treated it as a submodule
+# Fix: remove the nested .git, then re-add as regular files
+
+git rm --cached security-poc           # remove submodule reference
+rm -rf security-poc/.git               # delete nested git
+git add security-poc/                  # re-add as normal files
+git commit -m "Fix security-poc: remove nested git"
+git push
+```
+
+---
+
+### Rewriting history — removing Co-Authored-By from all commits
+
+```bash
+# Ran on both algorithms (146 commits) and node-learnings (2 commits)
+FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f \
+  --msg-filter 'grep -v "^Co-Authored-By: Claude"' \
+  -- --all
+
+git push --force    # hashes changed so must force push
+```
+
+---
+
+### Rewriting history — changing email across all commits
+
+```bash
+# Changed from jobs.shubhamgarg@email.com → schmuck21@gmail.com
+# So GitHub contribution graph shows correctly
+git filter-branch --env-filter '
+    export GIT_AUTHOR_EMAIL="schmuck21@gmail.com"
+    export GIT_COMMITTER_EMAIL="schmuck21@gmail.com"
+' -- --all
+
+git push --force
+```
+
+---
+
+### When push was rejected (diverged history)
+
+```bash
+# Error: "Updates were rejected because the remote contains work you do not have"
+# Happened after force-rewriting history
+
+# Fix 1: stash changes, force push, restore
+git stash
+git push --force
+git stash pop
+
+# Fix 2: if normal diverge (not history rewrite)
+git pull --rebase
+git push
+```
+
+---
+
+### Checking commits in both repos
+
+```bash
+# algorithms — 146 commits
+cd algorithms
+git log --oneline
+
+# node-learnings — 2 commits
+cd node-learnings
+git log --oneline
+
+# See a specific commit's full changes
+git show 1824392
+
+# See what changed in a file over time
+git log --oneline tree/BST.java
+```
+
+---
+
+### Deleting GitHub repos via CLI
+
+```bash
+# Deleted security-poc and algorithms-and-security-poc repos
+gh repo delete shubhaga1/security-poc --yes
+gh repo delete shubhaga1/algorithms-and-security-poc --yes
+
+# Verify what repos remain
+gh repo list shubhaga1
 ```
 
 ---
