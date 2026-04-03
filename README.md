@@ -20,22 +20,49 @@ rj BinarySearch       # finds and runs 06_BinarySearch.java
 
 ---
 
+## Learning Path — Folders by Difficulty
+
+Start from 1, go in order. Each folder builds on the previous.
+
+| # | Folder | Difficulty | What you learn |
+| --- | --- | --- | --- |
+| 1 | `Introduction/` | ⭐ Beginner | What data structures are, big-O basics |
+| 2 | `fundamentals/` | ⭐ Beginner | Java gotchas — pass-by-value, static vs instance |
+| 3 | `java8/` | ⭐⭐ Beginner+ | default methods, lambdas, Function/Predicate, wildcards |
+| 4 | `array/` | ⭐⭐ Beginner+ | Arrays, ArrayList, two-pointer, subarray problems |
+| 5 | `searching/` | ⭐⭐ Beginner+ | Linear search, binary search |
+| 6 | `sorting/` | ⭐⭐⭐ Intermediate | Bubble, insertion, merge sort, quicksort |
+| 7 | `hashmap/` | ⭐⭐⭐ Intermediate | HashMap patterns — frequency, common elements |
+| 8 | `slidingWindow/` | ⭐⭐⭐ Intermediate | Fixed/variable window, min subarray |
+| 9 | `stack/` | ⭐⭐⭐ Intermediate | Stack patterns — parentheses, next smaller element |
+| 10 | `LinkedList/` | ⭐⭐⭐ Intermediate | Cycle detection, partition |
+| 11 | `recursion/` | ⭐⭐⭐⭐ Hard | Base cases → backtracking → DP (01–18 ordered) |
+| 12 | `tree/` | ⭐⭐⭐⭐ Hard | BST, Trie, BTree — insert/search/delete |
+| 13 | `graph/` | ⭐⭐⭐⭐⭐ Advanced | BFS, DFS, Dijkstra — traversal + shortest path |
+| — | `patterns/` | ⭐⭐⭐ Any time | Design patterns — read alongside any topic |
+| — | `codequality/` | ⭐⭐⭐ Any time | Clean code habits — read after each topic |
+| — | `misc/` | ⭐⭐ Any time | Standalone problems — primes, collections |
+
 ## Project Structure
 
 ```
 algorithms/
-├── recursion/          # 01–18, ordered by difficulty
-├── tree/               # BST, Trie, BTree
-├── array/              # Two sum, subarray problems
-├── sorting/            # Bubble, insertion, merge sort
-├── searching/          # Linear, binary search
-├── stack/              # Valid parentheses, next smaller element
-├── hashmap/            # Frequency, common elements, subarray sum
-├── slidingWindow/      # Max sum in K, min subarray length
-├── graph/              # BFS, Dijkstra, traversal
+├── Introduction/       # 1. What are data structures — start here
+├── fundamentals/       # 2. Java gotchas (pass-by-value, static vs instance)
+├── java8/              # 3. Java 8+ features (lambdas, default, wildcards)
+├── array/              # 4. Arrays, ArrayList, subarray problems
+├── searching/          # 5. Linear, binary search
+├── sorting/            # 6. Bubble, insertion, merge, quick sort
+├── hashmap/            # 7. Frequency, common elements, subarray sum
+├── slidingWindow/      # 8. Max sum in K window, min subarray length
+├── stack/              # 9. Valid parentheses, next smaller element
+├── LinkedList/         # 10. Cycle detection, partition
+├── recursion/          # 11. 01–18 ordered — factorial to Sudoku
+├── tree/               # 12. BST, Trie, BTree
+├── graph/              # 13. BFS, DFS, Dijkstra
 ├── patterns/           # Design patterns (Venkat workshop) — 01–09
-├── fundamentals/       # Core Java gotchas (pass-by-value, static vs instance)
 ├── codequality/        # Clean code lessons Q1–Q5, 4 levels each
+├── misc/               # Standalone problems
 └── run.sh              # compile + run any file by class name
 ```
 
