@@ -17,15 +17,23 @@
  */
 class NodeBasics {
 
+    // static = Node does NOT need an outer NodeBasics instance to exist
+    // Without static: new NodeBasics().new Node(10)  ← ugly, broken in main()
+    // With static:    new Node(10)                   ← clean
     static class Node {
-        int value;
-        Node left;
-        Node right;
 
-        Node(int value) {
-            this.value = value;
+        int value;   // data this node holds
+        Node left;   // pointer to left child  (null = no child)
+        Node right;  // pointer to right child (null = no child)
+
+        Node(int val) {
+            this.value = val;
+            // left and right are null by default — no need to set them
         }
 
+        // toString() is called automatically when you print an object
+        // Without it: prints NodeBasics$Node@7852e922  (memory address, useless)
+        // With it:    prints Node(10)                  (readable)
         @Override
         public String toString() {
             return "Node(" + value + ")";
@@ -33,12 +41,13 @@ class NodeBasics {
     }
 
     public static void main(String[] args) {
-        // Build the tree above manually
-        Node root  = new Node(10);
-        root.left  = new Node(5);
-        root.right = new Node(15);
-        root.left.left  = new Node(3);
-        root.left.right = new Node(7);
+
+        // Build the tree manually
+        Node root        = new Node(10);
+        root.left        = new Node(5);
+        root.right       = new Node(15);
+        root.left.left   = new Node(3);
+        root.left.right  = new Node(7);
 
         System.out.println("Root            : " + root);
         System.out.println("Left child      : " + root.left);
