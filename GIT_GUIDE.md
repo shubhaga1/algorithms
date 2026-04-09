@@ -353,8 +353,20 @@ git show abc1234:tree/BST.java
 ## Branches — working on features in parallel
 
 ```bash
-# See all branches
+# See local branches (current branch has *)
 git branch
+# * main
+#   feature/add-heap
+
+# See ALL branches — local + remote
+git branch -a
+# * main
+#   feature/add-heap
+#   remotes/origin/main
+#   remotes/origin/feature/add-heap
+
+# See only remote branches
+git branch -r
 
 # Create a new branch
 git branch feature/add-heap
@@ -362,12 +374,19 @@ git branch feature/add-heap
 # Switch to it
 git checkout feature/add-heap
 
+# Modern way to switch (git 2.23+)
+git switch feature/add-heap
+
 # Shortcut: create and switch in one command
 git checkout -b feature/add-heap
+git switch -c feature/add-heap    # modern equivalent
 
 # Do your work, commit as usual...
 git add heap/MaxHeap.java
 git commit -m "Add MaxHeap with insert and extractMax"
+
+# Push branch to GitHub (first time)
+git push -u origin feature/add-heap
 
 # Switch back to main
 git checkout main
@@ -375,14 +394,161 @@ git checkout main
 # Merge your feature into main
 git merge feature/add-heap
 
-# Delete the branch after merging
+# Delete local branch after merging
 git branch -d feature/add-heap
+
+# Delete remote branch
+git push origin --delete feature/add-heap
+
+# Rename a branch
+git branch -m old-name new-name
 ```
 
 **When to use branches:**
 - New feature you're not sure about
 - Experimental refactoring
 - Working with others (each person on their own branch)
+
+---
+
+## git checkout — navigate your repo
+
+```bash
+# Switch branch
+git checkout main
+git checkout feature/add-heap
+
+# Create + switch in one command
+git checkout -b feature/new-feature
+
+# Go back to a specific commit (detached HEAD — read only)
+git checkout abc1234
+# You're now "detached" — not on any branch
+# Make a branch from here if you want to keep changes:
+git checkout -b fix/from-old-commit
+
+# Restore a specific file from a commit
+git checkout abc1234 -- tree/BST.java
+# Gets that file's version from that commit, puts it in your working directory
+
+# Restore a file to last committed state (discard edits)
+git checkout -- tree/BST.java
+# Same as: git restore tree/BST.java
+```
+
+**Detached HEAD explained:**
+```
+Normal:    HEAD → main → commit abc1234
+Detached:  HEAD → commit abc1234  (no branch pointer)
+
+Any commits you make in detached HEAD are lost unless you create a branch.
+```
+
+---
+
+## git cherry-pick — take one commit from another branch
+
+```bash
+# Scenario: you fixed a bug on feature branch, want that fix on main too
+# Without merging the entire feature branch
+
+# Step 1: find the commit hash you want
+git log --oneline feature/add-heap
+# abc1234 Fix null pointer in MaxHeap insert
+# def5678 Add MaxHeap insert (half done, don't want this)
+
+# Step 2: switch to target branch
+git checkout main
+
+# Step 3: cherry-pick just that one commit
+git cherry-pick abc1234
+# Creates a NEW commit on main with the same changes
+
+# Cherry-pick a range of commits
+git cherry-pick abc1234^..def5678   # from abc1234 to def5678 (inclusive)
+
+# Cherry-pick without committing (just apply changes, let you review first)
+git cherry-pick --no-commit abc1234
+git status   # review, then commit yourself
+```
+
+**When to use cherry-pick:**
+```
+✅ Hotfix on feature branch that needs to go to main immediately
+✅ Backport a fix to an older release branch
+✅ Accidentally committed on wrong branch — pick it to correct branch
+❌ Don't cherry-pick when you want the full feature — use merge instead
+```
+
+---
+
+## git stash — temporarily save work in progress
+
+```bash
+# Save current changes without committing
+git stash
+# Working directory is now clean
+
+# See what's stashed
+git stash list
+# stash@{0}: WIP on main: abc1234 Add BST
+
+# Restore stashed changes
+git stash pop        # restore + delete from stash
+git stash apply      # restore but keep in stash
+
+# Stash with a name
+git stash push -m "half-done heap implementation"
+
+# Stash specific files only
+git stash push tree/BST.java
+
+# Drop a stash without applying
+git stash drop stash@{0}
+
+# Clear all stashes
+git stash clear
+```
+
+**When to use:**
+```
+You're in the middle of work, need to switch branches quickly
+git pull is blocked by local changes
+Quick experiment — stash current, try something, pop back
+```
+
+---
+
+## git rebase — clean up history
+
+```bash
+# Rebase your feature branch on top of latest main
+git checkout feature/add-heap
+git rebase main
+# Takes your commits, reapplies them on top of latest main
+# Result: linear history (cleaner than merge)
+
+# Interactive rebase — edit, squash, reorder last N commits
+git rebase -i HEAD~3     # last 3 commits
+
+# In the editor that opens:
+# pick abc1234 Add MaxHeap insert
+# squash def5678 Fix typo in MaxHeap   ← squash = combine with above
+# pick ghi9012 Add MaxHeap extractMax
+
+# Abort a rebase in progress
+git rebase --abort
+
+# Continue after resolving conflicts
+git rebase --continue
+```
+
+**Merge vs Rebase:**
+```
+Merge:   keeps full history, shows branch + merge commit
+Rebase:  linear history, looks like all commits happened on one line
+Rule:    never rebase shared branches (main) — only rebase your own feature branches
+```
 
 ---
 
@@ -622,6 +788,7 @@ gh repo list shubhaga1
 | `git add <file>` | Stage a file for commit |
 | `git add .` | Stage everything |
 | `git commit -m "msg"` | Save a snapshot |
+| `git commit -am "msg"` | Stage modified + commit (skips new files) |
 | `git push` | Upload to GitHub |
 | `git pull` | Download from GitHub |
 | `git log --oneline` | See commit history |
@@ -629,7 +796,21 @@ gh repo list shubhaga1
 | `git diff --staged` | See staged changes |
 | `git restore <file>` | Discard changes in a file |
 | `git restore --staged <file>` | Unstage a file |
-| `git branch <name>` | Create a branch |
+| `git reset HEAD~1` | Undo last commit, keep changes |
+| `git branch` | See local branches |
+| `git branch -a` | See all branches (local + remote) |
+| `git branch -r` | See remote branches only |
 | `git checkout <branch>` | Switch branch |
+| `git checkout -b <branch>` | Create + switch branch |
+| `git switch <branch>` | Switch branch (modern) |
+| `git switch -c <branch>` | Create + switch (modern) |
 | `git merge <branch>` | Merge branch into current |
+| `git cherry-pick <hash>` | Apply one commit from another branch |
+| `git stash` | Save work in progress temporarily |
+| `git stash pop` | Restore stashed changes |
+| `git rebase main` | Reapply your commits on top of main |
+| `git rebase -i HEAD~3` | Interactively edit last 3 commits |
+| `git branch -d <name>` | Delete local branch |
+| `git push origin --delete <name>` | Delete remote branch |
 | `git push --force` | Overwrite remote history |
+| `git remote -v` | See remote URL |
