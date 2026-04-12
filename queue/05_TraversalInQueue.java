@@ -24,7 +24,8 @@ import java.util.Queue;
  *
  * Output: 10 20 30 40 50
  */
-public class TraversalInQueue {
+
+class TraversalInQueue {
 
     public static void main(String[] args) {
         Queue<Integer> q = new LinkedList<>();
