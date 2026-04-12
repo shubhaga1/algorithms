@@ -7,16 +7,91 @@ Java DSA implementations + clean code learning. Each file is runnable standalone
 ## How to Run Any File
 
 ```bash
-# From project root — fuzzy search by class name
-rj Fibonacci          # finds and runs 02_Fibonacci.java
-rj Sudoku             # finds and runs 18_Sudoku.java
-rj BinarySearch       # finds and runs 06_BinarySearch.java
+# From anywhere — fuzzy search by class name
+rj Fibonacci              # finds and runs 02_Fibonacci.java
+rj TraversalInQueue       # finds and runs queue/05_TraversalInQueue.java
+rj BinarySearch           # finds and runs 06_BinarySearch.java
 
 # Or explicitly
 ./run.sh recursion/02_Fibonacci.java
 ```
 
-> `rj` is a shell alias in `~/.zshrc` — add it once and use everywhere.
+---
+
+## Setting up `rj` (one-time)
+
+`rj` is a shell function defined in `~/.zshrc`. It finds the Java file, compiles it, and runs it — all in one command.
+
+### Step 1 — Open `~/.zshrc`
+
+```bash
+open ~/.zshrc          # opens in TextEdit
+# OR edit in VSCode:
+code ~/.zshrc
+```
+
+### Step 2 — Add this function at the bottom
+
+```bash
+# Run Java file from algorithms project — usage: rj Fibonacci
+rj() {
+    local BASE="/Users/shubhamgarg/Downloads/Code/algorithms"
+    local INPUT="$1"
+
+    # If exact path given, use it; otherwise search for the file
+    if [ -f "$BASE/$INPUT" ]; then
+        FILE="$BASE/$INPUT"
+    elif [ -f "$BASE/$INPUT.java" ]; then
+        FILE="$BASE/$INPUT.java"
+    else
+        FILE=$(find "$BASE" -name "*${INPUT}*.java" | head -1)
+    fi
+
+    if [ -z "$FILE" ]; then
+        echo "No Java file found matching: $INPUT"
+        return 1
+    fi
+
+    echo "Running: ${FILE#$BASE/}"
+    CLASS=$(grep -m1 "^class\|^public class" "$FILE" \
+        | sed 's/public class //;s/class //;s/[{ ].*//')
+    mkdir -p "$BASE/target"
+    javac -d "$BASE/target" "$FILE" && java -cp "$BASE/target" "$CLASS"
+}
+```
+
+### Step 3 — Reload (without closing terminal)
+
+```bash
+source ~/.zshrc
+```
+
+### Step 4 — Test it
+
+```bash
+rj Fibonacci
+# Running: recursion/02_Fibonacci.java
+# 0 1 1 2 3 5 8 ...
+```
+
+### How `rj` works internally
+
+```
+rj Fibonacci
+    │
+    ├── looks for exact match:  algorithms/Fibonacci        → not found
+    ├── looks for exact match:  algorithms/Fibonacci.java   → not found
+    └── searches with find:     find . -name "*Fibonacci*.java"
+                                → finds recursion/02_Fibonacci.java
+    │
+    ├── extracts class name from file:  "public class Fibonacci" → "Fibonacci"
+    ├── compiles:  javac -d target recursion/02_Fibonacci.java
+    └── runs:      java -cp target Fibonacci
+```
+
+**`~/.zshrc`** = shell startup script — runs every time you open a terminal.
+Anything defined here is available in every terminal session permanently.
+`source ~/.zshrc` = reload without opening a new tab.
 
 ---
 
