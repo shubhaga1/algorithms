@@ -30,7 +30,7 @@ import java.util.*;
  *   Producer-consumer simulation
  *   Task scheduling
  */
-public class QueueBasics {
+class QueueBasics {
 
     // ── 1. Queue API demo ─────────────────────────────────────────────────────
     static void queueApiDemo() {

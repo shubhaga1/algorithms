@@ -1,13 +1,15 @@
-package aakuTeaching;
+
 
 import java.util.Scanner;
 
-public class PrintPrime {
+class PrintPrime {
 
     public static void main(String[] args) {
         System.out.println("Enter the number till which you want to list all prime numbers");
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
+        int num;
+        try (Scanner sc = new Scanner(System.in)) {
+            num = sc.nextInt();
+        }
         System.out.println("Prime number between 0 and " + num + " are ");
         printAllPrimeNo(num);
         //printPrime(num);

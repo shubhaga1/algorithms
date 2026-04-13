@@ -17,6 +17,7 @@ class ArrayListMethods {
         // ── Create ────────────────────────────────────────────────────────────
         ArrayList<Integer> list = new ArrayList<>();               // empty
         ArrayList<Integer> fromList = new ArrayList<>(List.of(1, 2, 3)); // from values
+        System.out.println("fromList:        " + fromList);   // [1, 2, 3]
 
         // ── Add ───────────────────────────────────────────────────────────────
         list.add(10);           // add at end          → [10]

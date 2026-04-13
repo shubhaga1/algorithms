@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-class BinarySearch {
+class BinarySearchTeaching {
 
     public static void main(String[] args) {
         int[] ar = {6, 4, 7, 8, 2, 3};

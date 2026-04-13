@@ -48,8 +48,13 @@ class Trie {
     }
 
     public boolean startsWith(String prefix) {
-        // TODO
-        return false;
+        TrieNode current = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            int idx = prefix.charAt(i) - 'a';
+            if (current.children[idx] == null) return false;
+            current = current.children[idx];
+        }
+        return true;  // prefix exists — don't check isEnd (partial match is fine)
     }
 
     public static void main(String[] args) {

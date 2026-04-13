@@ -27,7 +27,7 @@ import java.util.*;
  *   - Trapping Rain Water (Deque/Stack)
  *   - Task Scheduler (PriorityQueue)
  */
-public class InterviewPatterns {
+class InterviewPatterns {
 
     // ── 1. Rotting Oranges — Multi-source BFS (Amazon, Google) ───────────────
     /**
