@@ -25,7 +25,7 @@ import java.util.*;
  *   Implement stack with queue / queue with stack
  *   BFS with priority from both ends
  */
-public class Deque {
+class DequeDemo {
 
     // ── 1. Deque API demo ─────────────────────────────────────────────────────
     static void dequeApiDemo() {

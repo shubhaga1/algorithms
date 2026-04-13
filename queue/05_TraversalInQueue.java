@@ -31,7 +31,7 @@ class TraversalInQueue {
         Queue<Integer> q = new LinkedList<>();
         q.add(10); q.add(20); q.add(30); q.add(40); q.add(50);
 
-        System.out.print("Queue traversal: ");
+        System.out.print("Queue traversal: testingg 111");
 
         int n = q.size();                    // snapshot size BEFORE loop
         for (int i = 1; i <= n; i++) {

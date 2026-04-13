@@ -29,7 +29,7 @@ import java.util.*;
  *   Dijkstra shortest path
  *   Meeting rooms
  */
-public class PriorityQueueProblems {
+class PriorityQueueProblems {
 
     // ── 1. PQ API demo ────────────────────────────────────────────────────────
     static void pqApiDemo() {
