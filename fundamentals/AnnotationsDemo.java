@@ -36,7 +36,7 @@ class AnnotationsDemo {
         // If you typo: "soound()" → compiler error immediately
         // Without @Override: no error, but parent method not overridden (silent bug)
 
-        @SuppressWarnings("unchecked")  // silence a specific compiler warning
+        @SuppressWarnings({"unchecked", "rawtypes"})  // silence unchecked + raw type warnings
         public void riskyMethod() {
             java.util.List list = new java.util.ArrayList();  // raw type — causes unchecked warning
             list.add("item");
@@ -58,12 +58,14 @@ class AnnotationsDemo {
 
         @RunTest(description = "checks addition", priority = 1)
         public static boolean testAdd() {
-            return (2 + 2) == 4;
+            int sum = 2 + 2;
+            return sum == 4;
         }
 
         @RunTest(description = "checks subtraction", priority = 2)
         public static boolean testSubtract() {
-            return (5 - 3) == 2;
+            int diff = 5 - 3;
+            return diff == 2;
         }
 
         public static boolean helperMethod() {  // no @RunTest — will be skipped
